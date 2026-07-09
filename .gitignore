@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build output
+.angular/
+dist/
+
+# Test coverage
+coverage/
+
+# Environment variables
+.env
+
+# VS Code settings
+.vscode/
+
+# IntelliJ IDEA settings
+.idea/
+
+# Log files
+*.log
