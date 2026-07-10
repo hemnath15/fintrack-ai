@@ -1,24 +1,42 @@
 import { Routes } from '@angular/router';
-import { Dashboard } from './features/dashboard/dashboard/dashboard';
+
 import { Login } from './features/auth/login/login';
+
+import { MainLayout } from './layouts/main-layout/main-layout';
+
 import { authGuard } from './core/guards/auth-guard';
+import { Dashboard } from './features/dashboard/pages/dashboard/dashboard';
+
 export const routes: Routes = [
-     {
+
+  {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full',
+    pathMatch: 'full'
   },
+
   {
     path: 'login',
-    component: Login,
+    component: Login
   },
-    {
-    path:'dashboard',
-    component:Dashboard,
-    canActivate:[authGuard]
-},
+
+  {
+    path: '',
+    component: MainLayout,
+    canActivate: [authGuard],
+    children: [
+
+      {
+        path: 'dashboard',
+        component: Dashboard
+      }
+
+    ]
+  },
+
   {
     path: '**',
-    redirectTo: 'login',
+    redirectTo: 'login'
   }
+
 ];

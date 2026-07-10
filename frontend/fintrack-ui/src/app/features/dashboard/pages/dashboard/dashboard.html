@@ -1,0 +1,53 @@
+<div class="dashboard">
+
+  <div class="dashboard-header">
+
+    <div>
+
+      <h1>Dashboard</h1>
+
+      <p>Welcome back, Hemnath 👋</p>
+
+    </div>
+
+    <button mat-flat-button color="primary">
+      <mat-icon>add</mat-icon>
+      Add Transaction
+    </button>
+
+  </div>
+
+<div class="kpi-grid">
+
+  @for(card of cards; track card.title){
+
+    <app-kpi-card
+
+      [title]="card.title"
+
+      [value]="card.value"
+
+      [icon]="card.icon"
+
+      [trend]="card.trend"
+
+      [positive]="card.positive">
+
+    </app-kpi-card>
+
+  }
+
+</div>
+
+  <div class="content-grid">
+
+    <app-revenue-chart></app-revenue-chart>
+    <app-expense-chart></app-expense-chart>
+
+    <app-recent-transactions></app-recent-transactions>
+    <app-ai-insights></app-ai-insights>
+
+
+  </div>
+
+</div>

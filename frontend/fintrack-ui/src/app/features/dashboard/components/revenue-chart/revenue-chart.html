@@ -1,0 +1,29 @@
+<mat-card class="chart-card">
+
+    <div class="card-header">
+
+        <h2>Revenue Trend</h2>
+
+        <button mat-button>
+            Last 6 Months
+        </button>
+
+    </div>
+
+    <apx-chart
+
+        [series]="chartSeries"
+
+        [chart]="chart"
+
+        [xaxis]="xaxis"
+
+        [stroke]="stroke"
+
+        [tooltip]="tooltip"
+
+        [dataLabels]="dataLabels">
+
+    </apx-chart>
+
+</mat-card>

@@ -1,0 +1,61 @@
+.kpi-card {
+
+  padding: 24px;
+
+  border-radius: 16px;
+
+  box-shadow: 0 8px 24px rgba(15,23,42,.08);
+
+  transition: .25s;
+
+}
+
+.kpi-card:hover {
+
+  transform: translateY(-4px);
+
+}
+
+.card-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+}
+
+mat-icon {
+
+  color: #2563EB;
+
+  font-size: 30px;
+
+}
+
+h2 {
+
+  margin: 20px 0 6px;
+
+  font-size: 30px;
+
+}
+
+p {
+
+  color: #64748B;
+
+}
+
+.positive {
+
+  color: #10B981;
+
+}
+
+.negative {
+
+  color: #EF4444;
+
+}

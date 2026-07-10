@@ -1,0 +1,87 @@
+.ai-card{
+
+    padding:24px;
+
+    border-radius:16px;
+
+}
+
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:24px;
+
+}
+
+.title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.badge{
+
+    background:#2563EB;
+
+    color:white;
+
+    padding:4px 10px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.insight{
+
+    display:flex;
+
+    gap:14px;
+
+    margin-bottom:20px;
+
+}
+
+.insight h3{
+
+    margin:0 0 4px;
+
+}
+
+.insight p{
+
+    margin:0;
+
+    color:#64748B;
+
+}
+
+.recommendation{
+
+    background:#EFF6FF;
+
+    padding:16px;
+
+    border-radius:12px;
+
+    margin:20px 0;
+
+}
+
+button{
+
+    width:100%;
+
+}

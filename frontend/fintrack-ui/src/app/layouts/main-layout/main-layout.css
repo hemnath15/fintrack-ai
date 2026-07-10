@@ -1,0 +1,30 @@
+.layout{
+
+    display:flex;
+    flex-direction:column;
+
+    height:100vh;
+
+}
+
+.layout-body{
+
+    flex:1;
+
+    display:flex;
+
+    overflow:hidden;
+
+}
+
+.content{
+
+    flex:1;
+
+    background:#f8fafc;
+
+    padding:30px;
+
+    overflow:auto;
+
+}
