@@ -1,8 +1,10 @@
 import { User } from './user';
 
 export interface LoginResponse {
-  accessToken: string;
-  refreshToken: string;
-  expiresIn: number;
-  user: User;
+  success: boolean;
+  message: string;
+  data: {
+    accessToken: string;
+    user: User;
+  };
 }

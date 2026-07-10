@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -13,6 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-login',
   imports: [
@@ -30,6 +31,7 @@ import {
   styleUrl: './login.css',
 })
 export class Login {
+  private authService = inject(AuthService);
   loginForm: FormGroup;
 
   hidePassword = true;
@@ -44,16 +46,38 @@ isLoading = false;
 
   }
 
-  onSubmit() {
+onSubmit() {
 
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return;
-    }
-this.isLoading = true;
-    console.log(this.loginForm.value);
-setTimeout(() => {
-    this.isLoading = false;
-  }, 2000);
+  if (this.loginForm.invalid) {
+    this.loginForm.markAllAsTouched();
+    return;
   }
+
+  this.isLoading = true;
+
+  this.authService.login(this.loginForm.value).subscribe({
+
+    next: (response) => {
+
+     this.authService.storeToken(
+    response.data.accessToken
+);
+
+      this.isLoading = false;
+
+      console.log(response);
+
+    },
+
+    error: (error) => {
+
+      this.isLoading = false;
+
+      console.error(error);
+
+    }
+
+  });
+
+}
 }
