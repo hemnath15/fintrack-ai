@@ -1,1 +1,120 @@
-<p>login works!</p>
+<div class="login-page">
+
+  <!-- Left Section -->
+  <div class="branding">
+
+    <h1>FinTrack AI</h1>
+
+    <p class="tagline">
+      Enterprise Financial Operations Dashboard
+    </p>
+
+    <div class="feature">
+      <mat-icon>analytics</mat-icon>
+      <span>Real-time Analytics</span>
+    </div>
+
+    <div class="feature">
+      <mat-icon>account_balance_wallet</mat-icon>
+      <span>Manage departmental budgets</span>
+    </div>
+
+    <div class="feature">
+      <mat-icon>payments</mat-icon>
+      <span>Track company expenses securely</span>
+    </div>
+
+    <div class="feature">
+      <mat-icon>psychology</mat-icon>
+      <span>AI Financial Insights</span>
+    </div>
+
+  </div>
+
+  <!-- Right Section -->
+  <div class="login-container">
+
+    <mat-card class="login-card">
+
+      <h2>Welcome Back</h2>
+<h2>Sign in to your account to continue.</h2>
+      <p class="subtitle">
+        Sign in to continue to FinTrack AI
+      </p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+
+          <input
+            matInput
+            formControlName="email">
+
+          <mat-icon matSuffix>mail</mat-icon>
+@if(loginForm.controls['email'].hasError('required')
+&& loginForm.controls['email'].touched){
+
+<mat-error>
+Email is required
+</mat-error>
+
+}
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>Password</mat-label>
+
+          <input
+            matInput
+            [type]="hidePassword ? 'password':'text'"
+            formControlName="password">
+
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="hidePassword=!hidePassword">
+
+            <mat-icon>
+              {{hidePassword ? 'visibility_off':'visibility'}}
+            </mat-icon>
+
+          </button>
+@if( loginForm.controls['password'].value.length < 8){
+<mat-error>
+Min 8 character is required
+</mat-error>
+
+}
+        </mat-form-field>
+<div class="forgot-password">
+
+    <a href="">
+        Forgot Password?
+    </a>
+
+</div>
+        <mat-checkbox formControlName="rememberMe">
+          Remember Me
+        </mat-checkbox>
+
+        <button
+          mat-flat-button
+          color="primary"
+          class="login-btn"
+          type="submit"
+          [disabled]="loginForm.invalid">
+
+          Sign In
+
+        </button>
+
+      </form>
+
+    </mat-card>
+
+  </div>
+
+</div>
