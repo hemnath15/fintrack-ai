@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {
   FormBuilder,
   FormGroup,
@@ -22,7 +23,8 @@ import {
     MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './login.html',
   styleUrl: './login.css',
@@ -31,7 +33,7 @@ export class Login {
   loginForm: FormGroup;
 
   hidePassword = true;
-
+isLoading = false;
   constructor(private fb: FormBuilder) {
 
     this.loginForm = this.fb.group({
@@ -48,8 +50,10 @@ export class Login {
       this.loginForm.markAllAsTouched();
       return;
     }
-
+this.isLoading = true;
     console.log(this.loginForm.value);
-
+setTimeout(() => {
+    this.isLoading = false;
+  }, 2000);
   }
 }

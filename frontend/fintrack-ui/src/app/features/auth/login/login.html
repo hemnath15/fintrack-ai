@@ -99,17 +99,24 @@ Min 8 character is required
         <mat-checkbox formControlName="rememberMe">
           Remember Me
         </mat-checkbox>
+<button
+    mat-flat-button
+    color="primary"
+    class="login-btn"
+    type="submit"
+    [disabled]="loginForm.invalid || isLoading">
 
-        <button
-          mat-flat-button
-          color="primary"
-          class="login-btn"
-          type="submit"
-          [disabled]="loginForm.invalid">
+    @if(!isLoading){
 
-          Sign In
+        Sign In
 
-        </button>
+    }@else{
+
+        <mat-spinner diameter="22"></mat-spinner>
+
+    }
+
+</button>
 
       </form>
 
