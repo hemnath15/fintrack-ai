@@ -14,6 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [
@@ -32,6 +33,7 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class Login {
   private authService = inject(AuthService);
+  private router = inject(Router);
   loginForm: FormGroup;
 
   hidePassword = true;
@@ -58,14 +60,22 @@ onSubmit() {
   this.authService.login(this.loginForm.value).subscribe({
 
     next: (response) => {
+      this.authService.storeToken(response.data.accessToken);
+      this.authService.getProfile().subscribe({
+        next: (profile) => {
+          this.isLoading = false;
+          this.router.navigate(['/dashboard']);
+        },
 
-     this.authService.storeToken(
-    response.data.accessToken
-);
+        error: (error) => {
 
-      this.isLoading = false;
+          this.isLoading = false;
 
-      console.log(response);
+          console.error(error);
+
+        }
+
+      });
 
     },
 
@@ -80,4 +90,5 @@ onSubmit() {
   });
 
 }
+
 }

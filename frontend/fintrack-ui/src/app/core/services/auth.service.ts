@@ -26,7 +26,15 @@ export class AuthService {
     );
 
   }
+  logout(): void {
+
+    this.tokenService.removeToken();
+
+}
 storeToken(token: string): void {
   this.tokenService.saveToken(token);
+}
+getProfile() {
+  return this.http.get(`${this.apiUrl}/profile`);
 }
 }
