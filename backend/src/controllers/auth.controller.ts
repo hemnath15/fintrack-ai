@@ -33,4 +33,37 @@ async profile(req: Request, res: Response) {
         data: (req as any).user
     });
 }
+ async register(req: Request, res: Response) {
+
+    try {
+
+      const user = await authService.register(req.body);
+
+      return res.status(201).json({
+        success: true,
+        message: "Registration successful",
+        data: user
+      });
+
+    } catch (error: any) {
+
+      if (error.message === "Email already exists") {
+
+        return res.status(409).json({
+          success: false,
+          message: error.message
+        });
+
+      }
+
+      console.error(error);
+
+      return res.status(500).json({
+        success: false,
+        message: "Registration failed"
+      });
+
+    }
+
+  }
 }

@@ -1,13 +1,14 @@
 import bcrypt from 'bcrypt';
-import { UserRepository } from '../repositories/user.repository';
+import { AuthRepository } from '../repositories/auth.repository';
 import { generateAccessToken } from '../utils/jwt';
+import { RegisterUserDto } from '../models/dto/register-user.dto';
 export class AuthService {
 
-    private userRepository = new UserRepository();
+    private authRepository = new AuthRepository();
 
     async login(email: string, password: string) {
 
-        const user = await this.userRepository.findByEmail(email);
+        const user = await this.authRepository.findByEmail(email);
 
         if (!user) {
             throw new Error('Invalid email or password');
@@ -40,5 +41,23 @@ return {
   }
 };
     }
+ async register(user: RegisterUserDto) {
 
+    // Check if email already exists
+    const existingUser = await this.authRepository.findByEmail(user.email);
+
+    if (existingUser) {
+      throw new Error('Email already exists');
+    }
+    // Hash password
+    const passwordHash = await bcrypt.hash(user.password, 10);
+    // Save user
+    const createdUser = await this.authRepository.createUser(
+      user,
+      passwordHash
+    );
+
+    return createdUser;
+
+  }
 }
