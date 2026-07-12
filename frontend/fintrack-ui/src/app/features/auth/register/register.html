@@ -1,1 +1,139 @@
-<p>register works!</p>
+<div class="auth-container">
+
+  <div class="auth-card">
+
+    <div class="logo">
+      <!-- <mat-icon>account_balance</mat-icon> -->
+      <h2>FinTrack AI</h2>
+      <p>Create your account</p>
+    </div>
+
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="register()">
+
+      <div class="name-row">
+
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+
+          <input
+            matInput
+            formControlName="first_name">
+
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+
+          <input
+            matInput
+            formControlName="last_name">
+
+          <mat-icon matSuffix>person_outline</mat-icon>
+        </mat-form-field>
+
+      </div>
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Email</mat-label>
+
+        <input
+          matInput
+          type="email"
+          formControlName="email">
+
+        <mat-icon matSuffix>mail</mat-icon>
+
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Password</mat-label>
+
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          formControlName="password">
+
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hidePassword = !hidePassword">
+
+          <mat-icon>
+            {{ hidePassword ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
+
+        </button>
+
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Confirm Password</mat-label>
+
+        <input
+          matInput
+          [type]="hideConfirmPassword ? 'password' : 'text'"
+          formControlName="confirmPassword">
+
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hideConfirmPassword = !hideConfirmPassword">
+
+          <mat-icon>
+            {{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
+
+        </button>
+
+      </mat-form-field>
+
+      @if(registerForm.value.password &&
+          registerForm.value.confirmPassword &&
+          !passwordsMatch()){
+
+      <p class="error-text">
+        Passwords do not match.
+      </p>
+
+      }
+
+      <button
+        mat-flat-button
+        color="primary"
+        class="register-btn"
+        type="submit"
+        [disabled]="isLoading">
+
+        {{ isLoading ? 'Creating Account...' : 'Create Account' }}
+
+      </button>
+
+    </form>
+
+    <div class="footer">
+
+      <p>
+
+        Already have an account?
+
+        <a routerLink="/login">
+
+          Sign In
+
+        </a>
+
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

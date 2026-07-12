@@ -150,3 +150,11 @@ width:90%;
 }
 
 }
+.auth-link a{
+color:#1976d2;
+text-decoration:none;
+font-weight:600;
+}
+.auth-link a:hover{
+    text-decoration:underline;
+}

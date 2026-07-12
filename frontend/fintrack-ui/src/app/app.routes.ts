@@ -4,7 +4,7 @@ import { Login } from './features/auth/login/login';
 
 import { MainLayout } from './layouts/main-layout/main-layout';
 
-import { authGuard } from './core/guards/auth-guard';
+import { authGuard } from './features/auth/guards/auth-guard';
 import { Dashboard } from './features/dashboard/pages/dashboard/dashboard';
 
 export const routes: Routes = [
@@ -19,7 +19,13 @@ export const routes: Routes = [
     path: 'login',
     component: Login
   },
-
+{
+  path: 'register',
+  loadComponent: () =>
+    import('./features/auth/register/register').then(
+      (m) => m.Register
+    )
+},
   {
     path: '',
     component: MainLayout,
