@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
@@ -10,6 +10,7 @@ import {
 } from 'ng-apexcharts';
 
 import { MatCardModule } from '@angular/material/card';
+import { DashboardService } from '../../services/dashboard.service';
 @Component({
   selector: 'app-expense-chart',
   imports: [ CommonModule,
@@ -18,24 +19,38 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './expense-chart.html',
   styleUrl: './expense-chart.css',
 })
-export class ExpenseChart {
+export class ExpenseChart implements OnInit {
+    private dashboardService = inject(DashboardService);
+    private cdr = inject(ChangeDetectorRef)
+  ngOnInit(): void {
+
+  this.dashboardService.getExpenses().subscribe({
+
+    next: (response) => {
+
+      this.series = response.data.map(item => item.amount);
+
+      this.labels = response.data.map(item => item.category);
+this.cdr.detectChanges()
+    },
+
+    error: (err) => {
+
+      console.error(err);
+
+    }
+
+  });
+
+}
+
    chart: ApexChart = {
     type: 'donut'
   };
 
-  series: ApexNonAxisChartSeries = [
-    40,
-    25,
-    20,
-    15
-  ];
+  series: ApexNonAxisChartSeries = []
 
-  labels: string[] = [
-    'Salary',
-    'Travel',
-    'Office',
-    'Misc'
-  ];
+  labels: string[] = [];
 
   legend: ApexLegend = {
     position: 'bottom'

@@ -1,8 +1,8 @@
 export interface RecentTransaction {
 
-  date: string;
+  transaction_date: string;
 
-  description: string;
+  title: string;
 
   category: string;
 

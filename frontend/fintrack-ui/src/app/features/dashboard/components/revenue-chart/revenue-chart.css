@@ -4,6 +4,8 @@
 
     padding:20px;
 
+    height:100%;
+
 }
 
 .card-header{
@@ -23,5 +25,7 @@
     margin:0;
 
     font-size:22px;
+
+    font-weight:600;
 
 }

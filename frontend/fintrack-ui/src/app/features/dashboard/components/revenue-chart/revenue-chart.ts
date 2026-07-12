@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import {
   NgApexchartsModule,
   ApexAxisChartSeries,
@@ -6,10 +6,12 @@ import {
   ApexXAxis,
   ApexStroke,
   ApexDataLabels,
-  ApexTooltip
+  ApexTooltip,
+  ApexYAxis
 } from 'ng-apexcharts';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { DashboardService } from '../../services/dashboard.service';
 @Component({
   selector: 'app-revenue-chart',
   imports: [  CommonModule,
@@ -17,13 +19,11 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './revenue-chart.html',
   styleUrl: './revenue-chart.css',
 })
-export class RevenueChart {
- chartSeries: ApexAxisChartSeries = [
-    {
-      name: 'Revenue',
-      data: [120000,180000,160000,210000,250000,280000]
-    }
-  ];
+export class RevenueChart implements OnInit {
+
+  private dashboardService = inject(DashboardService);
+private cdr = inject(ChangeDetectorRef);
+  chartSeries: ApexAxisChartSeries = [];
 
   chart: ApexChart = {
     type: 'area',
@@ -34,14 +34,13 @@ export class RevenueChart {
   };
 
   xaxis: ApexXAxis = {
-    categories: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun'
-    ]
+    categories: []
+  };
+
+  yaxis: ApexYAxis = {
+    labels: {
+      formatter: (value: number) => `₹${value}`
+    }
   };
 
   stroke: ApexStroke = {
@@ -55,5 +54,44 @@ export class RevenueChart {
   tooltip: ApexTooltip = {
     theme: 'light'
   };
+
+  ngOnInit(): void {
+
+    this.loadRevenue();
+
+  }
+
+  loadRevenue(): void {
+
+    this.dashboardService.getRevenue().subscribe({
+
+      next: (response) => {
+
+        this.chartSeries = [
+
+          {
+            name: 'Revenue',
+            data: response.data.map(item => item.revenue)
+          }
+
+        ];
+
+        this.xaxis = {
+
+          categories: response.data.map(item => item.month)
+
+        };
+this.cdr.detectChanges()
+      },
+
+      error: (err) => {
+
+        console.error(err);
+
+      }
+
+    });
+
+  }
 
 }

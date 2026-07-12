@@ -16,29 +16,39 @@
     </button>
 
   </div>
-
+@if(summary){
 <div class="kpi-grid">
+  <app-kpi-card
+    title="Revenue"
+    [value]="'₹' + (summary.revenue ?? 0)"
+    icon="payments"
+    trend="+12%">
+  </app-kpi-card>
 
-  @for(card of cards; track card.title){
+  <app-kpi-card
+    title="Expenses"
+    [value]="'₹' + (summary.expenses ?? 0)"
+    icon="account_balance_wallet"
+    trend="-3%"
+    [positive]="false">
+  </app-kpi-card>
 
-    <app-kpi-card
+  <app-kpi-card
+    title="Profit"
+    [value]="'₹' + (summary.profit ?? 0)"
+    icon="trending_up"
+    trend="+18%">
+  </app-kpi-card>
 
-      [title]="card.title"
-
-      [value]="card.value"
-
-      [icon]="card.icon"
-
-      [trend]="card.trend"
-
-      [positive]="card.positive">
-
-    </app-kpi-card>
-
-  }
+  <app-kpi-card
+    title="Users"
+    [value]="(summary.users ?? 0).toString()"
+    icon="groups"
+    trend="+0%">
+  </app-kpi-card>
 
 </div>
-
+}
   <div class="content-grid">
 
     <app-revenue-chart></app-revenue-chart>
